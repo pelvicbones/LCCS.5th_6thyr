@@ -1,0 +1,55 @@
+#MATH QUIZZ
+import random
+
+count = 0  # Initialize count variable outside the loop
+
+print("QUESTION 1 : ")
+math1 = random.randint(1, 10)
+math2 = random.randint(1, 10)
+add = math1 + math2
+print(math1, "+", math2, "=")
+ask = int(input())
+if ask == add:
+    count += 1
+
+print("QUESTION 2 : ")
+math1 = random.randint(1, 10)
+math2 = random.randint(1, 10)
+add = math1 + math2
+print(math1, "+", math2, "=")
+ask = int(input())
+if ask == add:
+    count += 1
+
+print("QUESTION 3 : ")
+math1 = random.randint(1, 10)
+math2 = random.randint(1, 10)
+add = math1 + math2
+print(math1, "+", math2, "=")
+ask = int(input())
+if ask == add:
+    count += 1
+
+print("QUESTION 4: ")
+math1 = random.randint(1, 10)
+math2 = random.randint(1, 10)
+add = math1 + math2
+print(math1, "+", math2, "=")
+ask = int(input())
+if ask == add:
+    count += 1
+
+print("QUESTION 5 : ")
+math1 = random.randint(1, 10)
+math2 = random.randint(1, 10)
+add = math1 + math2
+print(math1, "+", math2, "=")
+ask = int(input())
+if ask == add:
+    count += 1
+
+print("Score =", count, "/5")
+if count == 5 :
+    print("Excellent!")
+else :
+    print ("you can do better")
