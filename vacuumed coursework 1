@@ -1,0 +1,36 @@
+import pandas as pd
+
+input_file = 'courseworkproject.csv'
+output_file = 'cleaned_coursework.csv'
+
+# Have python read the raw csv file
+data = pd.read_csv(courseworkproject.csv)
+print(data.to_string())
+
+# Clean the data if it has invalid characters
+def contains_invalid_characters(cell):
+    return ' ' in cell or '*'
+
+# New variable so that it functions on each cell
+vacuum = data.applymap(contains_invalid_characters)
+
+# Print summary statistics for numerical columns
+print(data.describe())
+
+# Missing values
+no_data = data.isnull().sum()
+print(no_data)
+
+# Replace missing values in 'weight that differ for female' column with 'NA'
+data['weight that differ for female'] = data['weight that differ for female'].fillna(value='NA')
+
+# Remove rows with invalid characters
+cleaned_data = data[~vacuum.any(axis=1)]
+
+# Convert to lowercase and take out blanks 
+cleaned_data.columns = cleaned_data.columns.str.strip().str.lower().str.replace(' ', '_')
+print(cleaned_data.columns)
+
+# Write cleaned data to a new CSV file
+cleaned_data.to_csv(output_file, index=False)
+print(f"Cleaned data has been written to {output_file}")
