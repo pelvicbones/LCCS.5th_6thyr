@@ -33,4 +33,4 @@ print(cleaned_data.columns)
 
 # Write cleaned data to a new CSV file
 cleaned_data.to_csv(output_file, index=False)
-print(f"Cleaned data has been written to {output_file}")
+print(f"Cleaned data has been written to {cleaned_coursework}")
