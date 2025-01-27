@@ -1,0 +1,54 @@
+import pandas as pd
+
+# Variables for input and output file paths
+input_file = 'courseworkproject.csv'
+output_file = 'cleaned_coursework.csv'
+
+# Step 1: Read the dataset
+data = pd.read_csv(input_file, dtype=str)  # Read all data as strings
+
+# Step 2: Remove special symbols '~' and '*'
+data = data.replace({'~': '', '*': ''}, regex=True)
+
+# Step 3: Convert all text data to lowercase
+def convert_to_lowercase(value):
+    if isinstance(value, str):
+        return value.lower()
+    else:
+        return value
+
+data = data.applymap(convert_to_lowercase)
+
+# Step 4: Fill empty cells with 'NA'
+data = data.fillna('NA')
+
+# Step 5: Process numerical ranges
+# Replace 'Column1', 'Column2', 'Column3' with your actual column names
+numeric_range_columns = ['AgeRange', 'ScoreRange', 'DurationRange']
+
+def calculate_range_average(cell_value):
+    if isinstance(cell_value, str):
+        # Split by non-digit characters and filter out empty strings
+        numbers = [float(num) for num in cell_value.split() if num.isdigit()]
+        if len(numbers) == 2:
+            # Calculate the average of the two numbers
+            average = (numbers[0] + numbers[1]) / 2
+            return average
+        elif len(numbers) == 1:
+            # Only one number is present
+            return numbers[0]
+        else:
+            # No numbers found, return 'NA'
+            return 'NA'
+    else:
+        return 'NA'
+
+for column_name in numeric_range_columns:
+    data[column_name] = data[column_name].apply(calculate_range_average)
+
+# Optional: Convert columns to numeric data types after processing
+for column_name in numeric_range_columns:
+    data[column_name] = pd.to_numeric(data[column_name], errors='coerce')
+
+# Step 6: Save the cleaned data
+data.to_csv(output_file, index=False)
